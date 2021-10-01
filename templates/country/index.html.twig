@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CountryController!{% endblock %}
+
+{% block body %}
+    <h1>Les pays de la bière</h1>
+    <div class="row">
+        {% for country in countries %}
+            <div class="col-6">
+                <h2><a href="{{ path('beers_by_country', {id:country.id}) }}">{{ country.name }}</a></h2>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BarController!{% endblock %}
+
+{% block body %}
+    {% if country is defined %}
+        <h1>{{ country.name }}</h1>
+    {% endif %}
+    {% for beer in beers %}
+        <h2><a href="{{ path('beer',{id:beer.id}) }}">{{ beer.name }}</a></h2>
+    {% endfor %}
+{% endblock %}

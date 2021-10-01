@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BarController!{% endblock %}
+
+{% block body %}
+    <h1>Nos bières</h1>
+    <div class="row">
+        {% for beer in beers %}
+            <div class="col-6">
+                <h2><a href="{{ path('beer',{id:beer.id}) }}">{{ beer.name }}</a></h2>
+                <p><a href="{{ path('beers_by_country', {id:beer.country.id}) }}">{{ beer.country.name }}</a></p>
+                <img class="w-50" src="{{ beer.photo }}" alt="">
+                <p>{{ beer.description }}</p>
+                {% set normals = normal(beer) %}
+                {% set specials = special(beer) %}
+                {% if normals %}
+                    <h4>Catégories normales :</h4>
+                    <ul>
+                        {% for category in normal(beer) %}
+                            <li><a href="{{ path('beers_by_category',{id:category.id}) }}">{{ category.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                {% if specials %}
+                    <h4>Catégories spéciales :</h4>
+                    <ul>
+                        {% for category in special(beer) %}
+                            <li><a href="{{ path('beers_by_category',{id:category.id}) }}">{{ category.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <p>Publié le {{ beer.publishedAt | format_datetime('full', 'none', locale='fr') }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
